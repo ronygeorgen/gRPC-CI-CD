@@ -70,6 +70,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i private_key ${USER}@${HOST} '
             docker pull ronygeorgen/grpc-server:latest
             docker pull ronygeorgen/grpc-client:latest
+            docker compose up -d
           '
 
 
