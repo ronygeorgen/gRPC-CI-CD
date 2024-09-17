@@ -56,19 +56,19 @@ jobs:
         docker push $DOCKER_HUB_USERNAME/$SERVER_IMAGE_NAME:latest
         docker push $DOCKER_HUB_USERNAME/$CLIENT_IMAGE_NAME:latest
 
-deploy:
-    needs: build-and-push
-    runs-on: ubuntu-latest
-    steps:
-    - name: Deploy to server
-      env:
-        PRIVATE_KEY: ${{ secrets.aws_secret }}
-        HOST: ${{ secrets.SERVER_HOST }}
-        USER: ${{ secrets.SERVER_USER }}
-      run: |
-        echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-        ssh -o StrictHostKeyChecking=no -i private_key ${USER}@${HOST} '
-          docker pull $DOCKER_HUB_USERNAME/grpc-server:latest
-          docker pull $DOCKER_HUB_USERNAME/grpc-client:latest
-          docker-compose up -d
-        '
+  deploy:
+      needs: build-and-push
+      runs-on: ubuntu-latest
+      steps:
+      - name: Deploy to server
+        env:
+          PRIVATE_KEY: ${{ secrets.aws_secret }}
+          HOST: ${{ secrets.SERVER_HOST }}
+          USER: ${{ secrets.SERVER_USER }}
+        run: |
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER}@${HOST} '
+            docker pull $DOCKER_HUB_USERNAME/grpc-server:latest
+            docker pull $DOCKER_HUB_USERNAME/grpc-client:latest
+            docker-compose up -d
+          '
