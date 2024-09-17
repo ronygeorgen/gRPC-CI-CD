@@ -72,3 +72,5 @@ jobs:
             docker pull $DOCKER_HUB_USERNAME/grpc-client:latest
             docker compose up -d
           '
+
+          
