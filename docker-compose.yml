@@ -7,8 +7,7 @@ services:
     volumes:
       - ./server:/app
     restart: always
-    depends_on:
-      - db
+ 
   client:
     build: ./client
     ports:
@@ -18,10 +17,3 @@ services:
     restart: always
     depends_on:
       - server
-      - db
-  db:
-    image: postgres:16.1
-    environment:
-      PASSWORD: "Rony@2001"
-    ports:
-      - "5432:5432"
