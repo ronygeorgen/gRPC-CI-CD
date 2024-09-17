@@ -68,8 +68,8 @@ jobs:
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
           ssh -o StrictHostKeyChecking=no -i private_key ${USER}@${HOST} '
-            docker pull $DOCKER_HUB_USERNAME/grpc-server:latest
-            docker pull $DOCKER_HUB_USERNAME/grpc-client:latest
+            docker pull ronygeorgen/grpc-server:latest
+            docker pull ronygeorgen/grpc-client:latest
           '
 
 
